@@ -41,6 +41,12 @@ namespace ETB.Test
             Assert.That(ret2["Data"], Is.EqualTo("soo"));
             Assert.That(ret2["Val"], Is.EqualTo("32"));
 
+            var data3 = new MyClass { Data = "muuu", Val = -2 };
+            var ret3 = mapper2(data3);
+            Assert.That(ret3.Keys.Count, Is.EqualTo(2));
+            Assert.That(ret3["Data"], Is.EqualTo("muuu"));
+            Assert.That(ret3["Val"], Is.EqualTo("-2"));
+
         }
 
     }
