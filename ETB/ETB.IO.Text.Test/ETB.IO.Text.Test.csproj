@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CsvWriterTest.cs" />
+    <Compile Include="JsonReadWriteTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\ETB.IO.Text\ETB.IO.Text.csproj">
       <Project>{9c248a94-8263-4711-97b1-3002b4027d8d}</Project>
       <Name>ETB.IO.Text</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ETB.IO\ETB.IO.csproj">
+      <Project>{3f19323b-7aeb-4f6f-a0a0-8de5355f1011}</Project>
+      <Name>ETB.IO</Name>
     </ProjectReference>
     <ProjectReference Include="..\ETB\ETB.csproj">
       <Project>{a73324bf-e341-4e68-89f1-05ac8a539391}</Project>
