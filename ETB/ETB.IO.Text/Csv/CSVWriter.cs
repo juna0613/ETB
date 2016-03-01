@@ -8,17 +8,12 @@ namespace ETB.IO.Text.Csv
     public class CSVWriter<T> : IWriter<T>
     {
         private readonly TextWriter _writer;
-        private readonly Func<T, IDictionary<string, string>> _mapper;
         private readonly char _delimitor;
         private readonly bool _hasHeader;
-        public CSVWriter(TextWriter writer, Func<T, IDictionary<string, string>> mapper)
-            : this(writer, mapper, ',', true)
-        {
-        }
-        public CSVWriter(TextWriter writer, Func<T, IDictionary<string, string>> mapper, char delimitor, bool hasHeader)
+        
+        public CSVWriter(TextWriter writer, char delimitor = ',', bool hasHeader = true)
         {
             _writer = writer;
-            _mapper = mapper;
             _delimitor = delimitor;
             _hasHeader = hasHeader;
         }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using System.Xml;
+
 namespace ETB.IO.Text.Xml
 {
     public class XmlLoader<T> : ILoader<T>
@@ -17,8 +19,15 @@ namespace ETB.IO.Text.Xml
 
         public IEnumerable<T> Load()
         {
-            var serializer = new XmlSerializer(typeof(IEnumerable<T>));
-            return (IEnumerable<T>)serializer.Deserialize(_reader);
+            // this is a workaround to keep white space in string
+            XmlDocument doc = new XmlDocument();
+            doc.PreserveWhitespace = true;
+            doc.Load(_reader);
+            using (XmlNodeReader reader = new XmlNodeReader(doc.DocumentElement))
+            {
+                var serializer = new XmlSerializer(typeof(T[]));
+                return (IEnumerable<T>)serializer.Deserialize(reader);
+            }
         }
 
         #endregion

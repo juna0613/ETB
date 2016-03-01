@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.IO;
+using Newtonsoft.Json;
 namespace ETB.IO.Text.Json
 {
     public class JsonWriter<T> : IWriter<T>
     {
+        private readonly TextWriter _writer;
+        public JsonWriter(TextWriter writer)
+        {
+            _writer = writer;
+        }
+
         public void Save(IEnumerable<T> data)
         {
-            throw new NotImplementedException();
+            var str = JsonConvert.SerializeObject(data);
+            _writer.Write(str);
         }
     }
 }

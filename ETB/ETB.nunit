@@ -2,5 +2,6 @@
   <Settings activeconfig="Release"/>
   <Config name="Release">
     <assembly path="ETB.Test\bin\Release\ETB.Test.dll"/>
+    <assembly path="ETB.IO.Text.Test\bin\Release\ETB.IO.Text.Test.dll"/>
   </Config>
 </NUnitProject>
