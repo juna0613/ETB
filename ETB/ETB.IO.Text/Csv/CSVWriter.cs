@@ -33,10 +33,7 @@ namespace ETB.IO.Text.Csv
             };
             using (var writer = new CsvHelper.CsvWriter(_writer, config))
             {
-                foreach (var d in data)
-                {
-                    writer.WriteRecord(d);
-                }
+                writer.WriteRecords(data);
             }
         }
 
