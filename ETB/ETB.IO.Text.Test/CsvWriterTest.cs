@@ -44,7 +44,7 @@ namespace ETB.IO.Text.Test
                 OK" },
                 new MyClass { Data = 0.1, Hoge = DateTime.Today, Is = true, Muu = null },
             };
-            List<MyClass> rdata = null;
+            IEnumerable<MyClass> rdata = null;
             using (var writer = new System.IO.StreamWriter(_filepath))
             {
                 var csv = new ETB.IO.Text.Csv.CSVWriter<MyClass>(writer);
@@ -56,10 +56,10 @@ namespace ETB.IO.Text.Test
             using (var reader = new System.IO.StreamReader(_filepath))
             {
                 var rcsv = new Csv.CSVLoader<MyClass>(reader);
-                rdata = rcsv.Load().ToList();
+                rdata = rcsv.Load();
             }
             Assert.That(rdata.Count, Is.EqualTo(2));
-            var d1 = rdata[0];
+            var d1 = rdata.ElementAt(0);
             var d2 = data[0];
             Assert.That(d1.Data, Is.EqualTo(d2.Data));
             Assert.That(d1.Hoge, Is.EqualTo(d2.Hoge));

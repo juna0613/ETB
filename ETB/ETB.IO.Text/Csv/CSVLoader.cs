@@ -18,13 +18,15 @@ namespace ETB.IO.Text.Csv
 
         public IEnumerable<T> Load()
         {
+            var data = new List<T>();
             using (var reader = new CsvHelper.CsvReader(_reader, new CsvHelper.Configuration.CsvConfiguration { HasHeaderRecord = _hasHeader }))
             {
                 while(reader.Read())
                 {
-                    yield return reader.GetRecord<T>();
+                    data.Add(reader.GetRecord<T>());
                 }
             }
+            return data;
         }
 
         #endregion
