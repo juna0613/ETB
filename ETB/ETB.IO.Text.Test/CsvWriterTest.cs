@@ -38,7 +38,7 @@ namespace ETB.IO.Text.Test
                 rdata = rcsv.Load();
             }
             Assert.That(rdata, Is.Not.Null);
-            Assert.That(rdata.Count, Is.EqualTo(2));
+            Assert.That(rdata.Count(), Is.EqualTo(2));
 
             var d1 = rdata.ElementAt(0);
             var d2 = data[0];
