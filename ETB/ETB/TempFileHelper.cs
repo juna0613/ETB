@@ -7,13 +7,17 @@ namespace ETB
 {
     public static class TempFileHelper
     {
-        public static void CreateTempFile(Action<StreamWriter, string> action)
+        public static string CreateTempFileName(string basePath = null)
         {
-            var tempDir = Path.GetTempPath();
+            var tempDir = basePath ?? Path.GetTempPath();
             var name = Path.GetRandomFileName();
             var filePath = Path.Combine(tempDir, name);
-            
-            StreamWriter file = new StreamWriter(filePath, true, Encoding.GetEncoding("SHIFT_JIS"));
+            return filePath;
+        }
+        public static void CreateTempFile(Action<StreamWriter, string> action, string encoding = "SHIFT_JIS")
+        {
+            var filePath = CreateTempFileName();
+            StreamWriter file = new StreamWriter(filePath, true, Encoding.GetEncoding(encoding));
             try
             {
                 action(file, filePath);
