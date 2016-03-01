@@ -17,7 +17,7 @@ namespace ETB.IO.Text.Json
 
         public IEnumerable<T> Load()
         {
-            return JsonConvert.DeserializeObject<List<T>>(_reader.ReadToEnd());
+            return JsonConvert.DeserializeObject<IEnumerable<T>>(_reader.ReadToEnd());
         }
 
         #endregion
