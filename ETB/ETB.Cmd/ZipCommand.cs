@@ -12,6 +12,7 @@ namespace ETB.Cmd
         private readonly string[] _inputFullPaths;
         public ZipCommand(string outputPath, params string[] inputPaths)
         {
+            Console.WriteLine("ZipCommand----------------");
             _outputFullPath = Path.GetFullPath(outputPath);
             _inputFullPaths = inputPaths.Select(x => Path.GetFullPath(x)).ToArray();
         }
@@ -23,17 +24,54 @@ namespace ETB.Cmd
             try
             {
                 Path.GetFullPath(Path.GetDirectoryName(_outputFullPath)).CreateDirectoryIfNotExist();
-                var existFiles = _inputFullPaths.Where(File.Exists).ToArray();
-                var nonExistFiles = _inputFullPaths.Except(existFiles).ToArray();
-                using (var zf = new ZipFile(_outputFullPath))
+                var nonExistFiles = new List<string>();
+                TempFileHelper.CreateTempFolder(dir =>
                 {
-                    zf.BeginUpdate();
-                    foreach (var file in existFiles)
+                    foreach(var fileOrDir in _inputFullPaths)
                     {
-                        zf.Add(file);
+                        if(File.Exists(fileOrDir))
+                        {
+                            var dest = Path.Combine(dir, Path.GetFileName(fileOrDir));
+                            File.Copy(fileOrDir, dest, true);
+                        }
+                        else if(Directory.Exists(fileOrDir))
+                        {
+                            fileOrDir.CopyDirectoryTo(dir, true);
+                        }
+                        else
+                        {
+                            nonExistFiles.Add(fileOrDir);
+                        }
                     }
-                    zf.CommitUpdate();
-                }
+                    var fastZip = new FastZip();
+                    fastZip.CreateEmptyDirectories = true;
+                    fastZip.CreateZip(_outputFullPath, dir, true, string.Empty);
+                });
+                //using (var zf = ZipFile.Create(_outputFullPath))
+                //{
+                    
+                //    zf.BeginUpdate();
+                //    foreach (var fileOrDir in _inputFullPaths)
+                //    {
+                //        var folderName = Path.GetFullPath(Path.GetDirectoryName(fileOrDir));
+                //        var trans = new ZipNameTransform(folderName);
+                //        if(File.Exists(fileOrDir))
+                //        {
+                //            var transName = trans.TransformFile(fileOrDir);
+                //            zf.Add(fileOrDir, transName);
+                //        }
+                //        else if(Directory.Exists(fileOrDir))
+                //        {
+                //            var transName = trans.TransformDirectory(fileOrDir);
+                //            zf.AddDirectory(transName);
+                //        }
+                //        else // not found
+                //        {
+                //            nonExistFiles.Add(fileOrDir);
+                //        }
+                //    }
+                //    zf.CommitUpdate();
+                //}
                 if(nonExistFiles.Count() > 0)
                 {
                     stat = new CommandStatus
@@ -49,7 +87,7 @@ namespace ETB.Cmd
                     {
                         Status = 0,
                         Error = string.Empty,
-                        Output = "Successfully zipped"
+                        Output = "Successfully zipped {0}".Format2(_inputFullPaths.Join(","))
                     };
                 }
             }
@@ -57,7 +95,7 @@ namespace ETB.Cmd
             {
                 stat = new CommandStatus
                 {
-                    Error = e.Message,
+                    Error = e.PrettyPrint() ?? string.Empty,
                     Status = -1,
                     Output = string.Empty
                 };

@@ -15,6 +15,10 @@ namespace ETB
         {
             return "'" + self + "'";
         }
+        public static string PathJoin(this IEnumerable<string> self)
+        {
+            return System.IO.Path.Combine(self.ToArray());
+        }
         public static string Join(this IEnumerable<string> self, char separator)
         {
             return self.Join(separator.ToString());
