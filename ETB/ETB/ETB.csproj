@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assert.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="FileExtensions.cs" />
     <Compile Include="NumericExtension.cs" />
@@ -74,6 +75,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ETB.Logging\ETB.Logging.csproj">
+      <Project>{4a16099d-2b0d-47fe-a7b4-968a191b43d1}</Project>
+      <Name>ETB.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
