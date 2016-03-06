@@ -14,7 +14,21 @@ namespace ETB.Cmd.Test
             var cmd = @"dir d:\";
             var command = new DosCommand(cmd);
             var res = command.DoCommand();
-            Console.WriteLine(res.Output);
+            Assert.That(res.Status, Is.EqualTo(0), res.Error);
+            Assert.That(res.Error, Is.Empty);
+            Assert.That(res.Output, Is.Not.Empty);
+            Assert.That(res.Output, Contains.Substring(@"d:\"));
+        }
+
+        [Test]
+        public void TestErrorDir()
+        {
+            var cmd = @"dir b:\";
+            var command = new DosCommand(cmd);
+            var res = command.DoCommand();
+            Assert.That(res.Status, Is.Not.EqualTo(0));
+            Assert.That(res.Error, Is.Not.Empty);
+            Assert.That(res.Output, Is.Empty);
         }
     }
 }
