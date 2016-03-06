@@ -7,6 +7,21 @@ namespace ETB
 {
     public static class TempFileHelper
     {
+        public static void CreateTempFolder(Action<string> action, string basePath = null)
+        {
+            var baseDir = basePath ?? Path.GetTempPath();
+            var randomName = Path.GetRandomFileName();
+            var dirName = Path.Combine(baseDir, randomName);
+            try
+            {
+                dirName.CreateDirectoryIfNotExist();
+                action(dirName);
+            }
+            finally
+            {
+                dirName.DeleteDirectoryIfExist(true);
+            }
+        }
         public static string CreateTempFileName(string basePath = null)
         {
             var tempDir = basePath ?? Path.GetTempPath();
