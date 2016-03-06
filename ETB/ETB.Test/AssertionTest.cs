@@ -70,5 +70,18 @@ namespace ETB.Test
                 });
             });
         }
+
+        [Test]
+        public void TestAnyOfMultiAssertionsFails_ButNoThrowFlag_DoNoThrowException()
+        {
+            Assert.DoesNotThrow(() =>
+            {
+                AssertionHelper.DoAssert(a =>
+                {
+                    a.Add(true);
+                    a.Add(() => false);
+                }, false);
+            });
+        }
     }
 }
