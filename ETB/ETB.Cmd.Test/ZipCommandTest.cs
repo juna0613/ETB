@@ -37,7 +37,7 @@ namespace ETB.Cmd.Test
             var stat = cmd.DoCommand();
             Assert.That(_filePath, Is.Not.Null);
             Assert.That(stat.Status, Is.EqualTo(0), stat.Error);
-            // Assert.That(File.Exists(_filePath));
+            Assert.That(File.Exists(_filePath));
             Assert.That(stat.Output, Contains.Substring("Successfully zipped"));
 
         }
