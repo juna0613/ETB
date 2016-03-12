@@ -10,6 +10,7 @@ namespace ETB
     {
         public static string PrettyPrint(this Exception e)
         {
+            if (e == null) return string.Empty;
             return new[] { e.Message, e.StackTrace, e.Source }.Join(Environment.NewLine);
         }
     }
