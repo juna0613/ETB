@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CommandLine.Text;
 using System.Reflection;
 using ETB.App;
 using ETB.Logging;
-using CommandLine;
 namespace ETB.Exec
 {
     public class ExecMain
@@ -24,18 +22,10 @@ namespace ETB.Exec
 
                 logger.Info("Start Application");
                 logger.Info("Arguments: {0}", args.Select(_ => _.DoubleQuote()).Join(","));
-
-                var opt = new Options();
-                var status = CommandLine.Parser.Default.ParseArguments(args, opt);
-                if (!status)
-                {
-                    logger.Info("Target:\t{0}",opt.Target);
-                    logger.Info("ExecutableName:\t{0}", opt.ExecutableName);
-                    logger.Error("Failed to parse arguments. Command Help:{0}", opt.GetUsage());
-                    Environment.Exit(-1);
-                }
-                var targetDllPath = opt.Target;
-                var targetExecName = opt.ExecutableName;
+                AssertionHelper.DoAssert(helper => helper.Add(args.Length >= 2, "should have at least 2 arguments"));
+                
+                var targetDllPath = args[0];
+                var targetExecName = args[1];
                 var otherArgs = args.Skip(2);
                 AssertionHelper.DoAssert(helper =>
                 {
@@ -55,9 +45,9 @@ namespace ETB.Exec
                     Environment.Exit(-1);
                 }
 
-                cls.Setup(otherArgs.ToArray());
+                var setupResult = cls.Setup(otherArgs.ToArray());
                 var result = cls.Execute();
-                cls.Teardown();
+                var teardownResult = cls.Teardown();
             }
             catch (Exception e)
             {
@@ -90,23 +80,5 @@ namespace ETB.Exec
         }
     }
 
-    public class Options
-    {
-        [Option('t', "target", HelpText = "Target dll path", Required = true)]
-        public string Target
-        {
-            get; set;
-        }
-        [Option('e', "exec", HelpText = "Target Executable Name", Required = true)]
-        public string ExecutableName
-        {
-            get; set;
-        }
 
-        [HelpOption]
-        public string GetUsage()
-        {
-            return HelpText.AutoBuild(this, _ => { HelpText.DefaultParsingErrorsHandler(this, _); });
-        }
-    }
 }

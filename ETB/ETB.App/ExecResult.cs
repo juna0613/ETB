@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace ETB.App
 {
     public enum ExecStatus
@@ -31,6 +32,19 @@ namespace ETB.App
                 Message = message,
                 Error = ex ?? new Exception(message)
             };
+        }
+    }
+
+    public static class ExecResultExtension
+    {
+        public static ExecStatus WorstStatus(this IEnumerable<ExecStatus> statuses)
+        {
+            return statuses.OrderBy(x => (int)x).LastOrDefault();
+        }
+
+        public static ExecStatus BestStatus(this IEnumerable<ExecStatus> statuses)
+        {
+            return statuses.OrderBy(x => (int)x).FirstOrDefault();
         }
     }
 }

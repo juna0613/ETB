@@ -4,5 +4,6 @@
     <assembly path="ETB.Test\bin\Release\ETB.Test.dll"/>
     <assembly path="ETB.IO.Text.Test\bin\Release\ETB.IO.Text.Test.dll"/>
     <assembly path="ETB.Cmd.Test\bin\Release\ETB.Cmd.Test.dll"/>
+    <assembly path="ETB.App.Test\bin\Release\ETB.App.Test.dll"/>
   </Config>
 </NUnitProject>
