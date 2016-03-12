@@ -14,5 +14,23 @@ namespace ETB.App
         public ExecStatus Status { get; set; }
         public string Message { get; set; }
         public Exception Error { get; set; }
+        public static ExecResult SuccessResult(string message = "")
+        {
+            return new ExecResult
+            {
+                Status = ExecStatus.Success,
+                Message = message,
+                Error = null
+            };
+        }
+        public static ExecResult ErrorResult(string message = "", Exception ex = null)
+        {
+            return new ExecResult
+            {
+                Status = ExecStatus.Error,
+                Message = message,
+                Error = ex ?? new Exception(message)
+            };
+        }
     }
 }

@@ -45,6 +45,16 @@
     <Compile Include="IExecutable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ETB.Logging\ETB.Logging.csproj">
+      <Project>{4a16099d-2b0d-47fe-a7b4-968a191b43d1}</Project>
+      <Name>ETB.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ETB\ETB.csproj">
+      <Project>{a73324bf-e341-4e68-89f1-05ac8a539391}</Project>
+      <Name>ETB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

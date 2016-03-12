@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <log4net>
+    <appender name="BaseAppender" type="log4net.Appender.RollingFileAppender">
+      <File value="ETB.Exec.log" />
+      <AppendToFile value="true" />
+      <RollingStyle value="Size" />
+      <maxSizeRollBackups value="10" />
+      <maximumFileSize value="5KB" />
+      <StaticLogFileName value="true" />
+      <!--<layout type="log4net.Layout.PatternLayout">
+        <ConversionPattern value="%date [%thread] [%-5level] (%method) - %message%n" />
+      </layout>-->
+      <layout type="log4net.Layout.PatternLayout">
+        <ConversionPattern value="%date [%thread] [%-5level] %logger %file(%line) %class %method - %message%n" />
+      </layout>
+    </appender>
+    
+    <appender name="ColoredConsoleAppender" type="log4net.Appender.ColoredConsoleAppender">
+      <mapping>
+        <level value="ERROR" />
+        <foreColor value="White" />
+        <backColor value="Red, HighIntensity" />
+      </mapping>
+      <mapping>
+        <level value="DEBUG" />
+        <backColor value="Green" />
+      </mapping>
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>
+    
+    <root>
+      <level value="INFO" />
+      <appender-ref ref="BaseAppender" />
+      <appender-ref ref="ColoredConsoleAppender" />
+    </root>
+  </log4net>
+</configuration>  

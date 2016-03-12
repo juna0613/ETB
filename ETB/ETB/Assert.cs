@@ -56,7 +56,7 @@ namespace ETB
                     }
                     catch (Exception e)
                     {
-                        Logging.Logger.Instance.Error(e.Message);
+                        Logging.Logger.Instance.Warn(e.Message);
                         throw;
                     }
                 }
@@ -74,6 +74,18 @@ namespace ETB
         public void Add(Func<bool> status, string message = "")
         {
             _assertions.Add(new Assertion(status, message));
+        }
+        public void AddNotNull<T>(T data, string message = default(string))
+        {
+            _assertions.Add(new Assertion(() => data != null, "{0} is null".Format2(message)));
+        }
+        public void AddNotNulls<T>(IEnumerable<T> data, string message = default(string))
+        {
+            
+            foreach(var x in data)
+            {
+                AddNotNull(x, message);
+            }
         }
 
         private void DoAssert(bool throwException = true)
