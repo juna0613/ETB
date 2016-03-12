@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CommandLine.Text;
 using System.Reflection;
+using ETB.App;
 
 namespace ETB.Exec
 {

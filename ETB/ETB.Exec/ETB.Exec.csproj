@@ -75,8 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExecMain.cs" />
-    <Compile Include="ExecResult.cs" />
-    <Compile Include="IExecutable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +89,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ETB.App\ETB.App.csproj">
+      <Project>{c4a83dca-5681-4fd1-9654-d2346653b4a7}</Project>
+      <Name>ETB.App</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ETB\ETB.csproj">
       <Project>{a73324bf-e341-4e68-89f1-05ac8a539391}</Project>
       <Name>ETB</Name>

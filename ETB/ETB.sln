@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETB.Exec", "ETB.Exec\ETB.Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETB.Logging", "ETB.Logging\ETB.Logging.csproj", "{4A16099D-2B0D-47FE-A7B4-968A191B43D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETB.App", "ETB.App\ETB.App.csproj", "{C4A83DCA-5681-4FD1-9654-D2346653B4A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{4A16099D-2B0D-47FE-A7B4-968A191B43D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A16099D-2B0D-47FE-A7B4-968A191B43D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A16099D-2B0D-47FE-A7B4-968A191B43D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A83DCA-5681-4FD1-9654-D2346653B4A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A83DCA-5681-4FD1-9654-D2346653B4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A83DCA-5681-4FD1-9654-D2346653B4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A83DCA-5681-4FD1-9654-D2346653B4A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
