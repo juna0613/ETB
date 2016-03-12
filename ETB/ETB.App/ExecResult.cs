@@ -46,5 +46,34 @@ namespace ETB.App
         {
             return statuses.OrderBy(x => (int)x).FirstOrDefault();
         }
+
+        public static string PrettyPrint(this ExecResult self)
+        {
+            return new []
+            {
+               "Status:\t" + self.Status.ToString(), "Message:\t" + self.Message, "Error:\t" + (self.Error != null ? self.Error.PrettyPrint() : string.Empty)
+            }.Join(Environment.NewLine);
+        }
+
+        public static void PrettyLog(this ExecResult self, Logging.ILogger logger, string prefix = "", string suffix = "")
+        {
+            var content = prefix + self.PrettyPrint() + suffix;
+            switch (self.Status)
+            {
+                case ExecStatus.Success:
+                    logger.Info(content);
+                    break;
+                case ExecStatus.Warn:
+                    logger.Warn(content);
+                    break;
+                case ExecStatus.Error:
+                    logger.Error(content);
+                    break;
+                case ExecStatus.Fatal:
+                default:
+                    logger.Fatal(content);
+                    break;
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace ETB.Exec
         private static readonly Logger logger = Logger.Instance;
         public static void Main(string[] args)
         {
+            ExecStatus worstStatus = default(ExecStatus);
             try
             {
                 var writer = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -33,30 +34,32 @@ namespace ETB.Exec
                     helper.AddNotNull(targetExecName, "TargetExecName");
                 });
                 var typ = LoadType(targetDllPath, targetExecName);
-                if (typ == null)
-                {
-                    logger.Error("Cannot load {0} at {1}", targetExecName, targetDllPath);
-                    System.Environment.Exit(-1);
-                }
+                AssertionHelper.DoAssert(helper => helper.Add(typ != null, "Cannot load {0} at {1}".Format2(targetExecName, targetDllPath)));
+
                 var cls = Activator.CreateInstance(typ) as IExecutable;
-                if (cls == null)
-                {
-                    logger.Error("Loaded class[{0}] is not an IExecutable", targetExecName);
-                    Environment.Exit(-1);
-                }
+                AssertionHelper.DoAssert(helper => helper.Add(cls != null, "Loaded class[{0}] is not an IExecutable".Format2(targetExecName)));
 
                 var setupResult = cls.Setup(otherArgs.ToArray());
+                setupResult.PrettyLog(logger, "[Setup] Result" + Environment.NewLine);
+
                 var result = cls.Execute();
+                result.PrettyLog(logger, "[Execute] Result" + Environment.NewLine);
+
                 var teardownResult = cls.Teardown();
+                teardownResult.PrettyLog(logger, "[Teardown] Result" + Environment.NewLine);
+
+                worstStatus = new[] { setupResult.Status, result.Status, teardownResult.Status }.WorstStatus();
             }
             catch (Exception e)
             {
                 logger.Error("Error occurred\n{0}", e.PrettyPrint());
+                worstStatus = ExecStatus.Error;
             }
             finally
             {
-                logger.Info("Exit");
+                logger.Info("Exit with exit code [{0}]", worstStatus);
             }
+            Environment.Exit((int)worstStatus);
         }
 
         private static Type LoadType(string path, string name)
