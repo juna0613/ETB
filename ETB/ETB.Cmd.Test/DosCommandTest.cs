@@ -11,13 +11,13 @@ namespace ETB.Cmd.Test
         [Test]
         public void TestDir()
         {
-            var cmd = @"dir d:\";
+            var cmd = @"dir c:\";
             var command = new DosCommand(cmd);
             var res = command.DoCommand();
             Assert.That(res.Status, Is.EqualTo(0), res.Error);
             Assert.That(res.Error, Is.Empty);
             Assert.That(res.Output, Is.Not.Empty);
-            Assert.That(res.Output, Contains.Substring(@"d:\"));
+            Assert.That(res.Output, Contains.Substring(@"c:\"));
         }
 
         [Test]
