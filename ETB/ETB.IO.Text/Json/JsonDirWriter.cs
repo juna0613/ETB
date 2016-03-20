@@ -10,15 +10,16 @@ namespace ETB.IO.Text.Json
     {
         private readonly string _dirPath;
         private readonly Func<T, string> _nameGen;
-        public JsonDirWriter(string dirPath, Func<T, string> fileNameCreator)
+        private readonly Action<Exception> _errorHandle;
+        public JsonDirWriter(string dirPath, Func<T, string> fileNameCreator, Action<Exception> errorHandle = null)
         {
             _dirPath = dirPath;
             _nameGen = fileNameCreator;
+            _errorHandle = errorHandle;
         }
         public void Save(IEnumerable<T> data)
         {
             _dirPath.CreateDirectoryIfNotExist();
-            var exceptions = new List<Exception>();
             foreach(var d in data)
             {
                 var path = new[] { _dirPath, _nameGen(d) }.PathJoin();
@@ -30,13 +31,9 @@ namespace ETB.IO.Text.Json
                     }
                     catch(Exception e)
                     {
-                        exceptions.Add(e);
+                        if (_errorHandle != null) _errorHandle(e);
                     }
                 }
-            }
-            if(exceptions.Count > 0)
-            {
-                throw new MultiException(exceptions.ToArray());
             }
         }
     }
