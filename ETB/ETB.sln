@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETB.App", "ETB.App\ETB.App.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETB.App.Test", "ETB.App.Test\ETB.App.Test.csproj", "{3F8A1E59-2A6D-4105-9C82-3F3EAB624667}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETB.Fnc", "ETB.Fnc\ETB.Fnc.csproj", "{1ABE1392-CF79-491A-8523-2C0EF73C712F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETB.Fnc.Test", "ETB.Fnc.Test\ETB.Fnc.Test.csproj", "{EA0FAA4C-CC3A-450B-A4FE-1F2D5D5A8094}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +84,14 @@ Global
 		{3F8A1E59-2A6D-4105-9C82-3F3EAB624667}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F8A1E59-2A6D-4105-9C82-3F3EAB624667}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F8A1E59-2A6D-4105-9C82-3F3EAB624667}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ABE1392-CF79-491A-8523-2C0EF73C712F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ABE1392-CF79-491A-8523-2C0EF73C712F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ABE1392-CF79-491A-8523-2C0EF73C712F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ABE1392-CF79-491A-8523-2C0EF73C712F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA0FAA4C-CC3A-450B-A4FE-1F2D5D5A8094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA0FAA4C-CC3A-450B-A4FE-1F2D5D5A8094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA0FAA4C-CC3A-450B-A4FE-1F2D5D5A8094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA0FAA4C-CC3A-450B-A4FE-1F2D5D5A8094}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

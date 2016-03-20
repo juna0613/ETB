@@ -9,10 +9,11 @@ namespace ETB
     public class MultiException : Exception
     {
         private readonly IEnumerable<Exception> _es;
-        public MultiException(IEnumerable<Exception> es)
+        public MultiException(params Exception[] es)
         {
             _es = es;
         }
+        
         public override string Message
         {
             get
@@ -106,7 +107,7 @@ namespace ETB
             }
             if(!overallStatus && throwException)
             {
-                throw new MultiException(exceptions);
+                throw new MultiException(exceptions.ToArray());
             }
         }
         public static void DoAssert(Action<AssertionHelper> assertions, bool throwException = true)
