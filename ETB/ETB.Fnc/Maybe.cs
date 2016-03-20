@@ -126,11 +126,6 @@ namespace ETB.Fnc
             return Maybe.Return(value);
         }
 
-        public static Maybe<T> ToJust<T>(this T value)
-        {
-            return Maybe.Just(value);
-        }
-
         public static Maybe<T2> Bind<T1, T2>(this Maybe<T1> maybe, Func<T1, Maybe<T2>> func)
         {
             return Maybe.Bind(maybe, func);
