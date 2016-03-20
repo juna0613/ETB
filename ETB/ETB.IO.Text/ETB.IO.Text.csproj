@@ -69,6 +69,7 @@
     <Compile Include="Csv\CSVDataLoader.cs" />
     <Compile Include="Csv\CSVLoader.cs" />
     <Compile Include="Csv\CSVWriter.cs" />
+    <Compile Include="Json\JsonDirLoader.cs" />
     <Compile Include="Json\JsonDirWriter.cs" />
     <Compile Include="Json\JsonLoader.cs" />
     <Compile Include="Json\JsonReadHelper.cs" />
